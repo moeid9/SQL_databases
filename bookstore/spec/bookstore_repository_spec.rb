@@ -17,6 +17,7 @@ describe BookStoreRepository do
 		expect(books.length).to eq 5
 		expect(books.first.id).to eq '1'
 		expect(books.first.title).to eq 'Nineteen Eighty-Four'
-		expect(books[0].format_output).to eq '1 - Nineteen Eighty-Four - George Orwell'
+		expect(repo.format_output(books)).to eq '1 - Nineteen Eighty-Four - George Orwell'
+		
 	end
 end

@@ -9,8 +9,6 @@ DatabaseConnection.connect('bookstore_test')
 # Perform a SQL query on the database and get the result set.
 
 result = BookStoreRepository.new
-
-# Print out each record from the result set .
-result.format_output.each do |record|
-  p record
-end
+repo = result.all
+# Print out each record from the result set 
+result.format_output(repo)
