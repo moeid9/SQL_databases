@@ -1,39 +1,55 @@
 #Repository Class
 require_relative './music_library'
-class ArtistRepository
-  def all
-    sql = 'SELECT id, name, genre FROM artists'
-    result_set = DatabaseConnection.exec_params(sql,[])
-    artists = []
 
-    result_set.each do |record|
-      artist = Artist.new
-      artist.id = record['id']
-      artist.name = record['name']
-      artist.genre = record['genre']
-      
-      artists << artist
-    end
-    return artists
+class AlbumRepository
+
+  def all
+      sql = 'SELECT title, release_year, artist_id FROM albums;'
+      result_set = DatabaseConnection.exec_params(sql, [])
+
+      albums = []
+  
+      result_set.each do |record|
+        album = Album.new
+        album.title = record['title']
+        album.release_year = record['release_year']
+        album.artist_id = record['artist_id']
+
+        albums << album
+      end
+        return albums
   end
 
-  # Gets a single record by its ID
-  # One argument: the id (number)
   def find(id)
-    # Executes the SQL query:
-    # SELECT id, name, genre FROM artists WHERE id = $1;
-    sql = 'SELECT name, genre FROM artists WHERE id = $1;'
-    params = [id]
+    sql = "SELECT title, release_year, artist_id FROM albums WHERE id = $1"
+    result_set = DatabaseConnection.exec_params(sql, [id])
 
-    result = DatabaseConnection.exec_params(sql, params)
-    result.each do |record|
-      artist = Artist.new
-      artist.name = record['name']
-      artist.genre = record['genre']
-      
-      return artist
+    result_set.each do |record|
+      album = Album.new
+      album.title = record['title']
+      album.release_year = record['release_year']
+      album.artist_id = record['artist_id']
+      return album
     end
-    # Returns a single artist object.
+  end
+
+  def create(album)
+    sql = "INSERT INTO albums (title, release_year, artist_id) VALUES('#{album.title}', #{album.release_year}, #{album.artist_id});"
+    result_set = DatabaseConnection.exec_params(sql, [])
+    return result_set
+  end
+
+
+  def update(album, column_name, new_value)
+    sql = "UPDATE albums SET #{column_name} = #{new_value};"
+    result_set = DatabaseConnection.exec_params(sql, [])
+    return result_set
+  end
+       
+  def delete(title)
+    sql = "DELETE FROM albums WHERE title = '#{title}'"
+    result_set = DatabaseConnection.exec_params(sql, [])
+    return result_set
   end
 
 end
