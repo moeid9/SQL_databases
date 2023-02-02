@@ -22,8 +22,6 @@ class BookStoreRepository
 	def format_output(books)
 		i=0
 		#prints all records formatted
-		##got this error and am stuck with what to do
-			# undefined method `format_output' for #<BookStore:0x00007f8c008d9a58 @id="1", @title="Nineteen Eighty-Four", @author="George Orwell"> (NoMethodError)
 			books.each do
 				p "#{books[i].id} - #{books[i].title} - #{books[i].author}"
 				i+=1

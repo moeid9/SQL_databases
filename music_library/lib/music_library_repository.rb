@@ -22,8 +22,18 @@ class ArtistRepository
   def find(id)
     # Executes the SQL query:
     # SELECT id, name, genre FROM artists WHERE id = $1;
+    sql = 'SELECT name, genre FROM artists WHERE id = $1;'
+    params = [id]
 
-    # Returns a single srtist object.
+    result = DatabaseConnection.exec_params(sql, params)
+    result.each do |record|
+      artist = Artist.new
+      artist.name = record['name']
+      artist.genre = record['genre']
+      
+      return artist
+    end
+    # Returns a single artist object.
   end
 
 end

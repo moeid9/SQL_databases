@@ -20,4 +20,5 @@ describe ArtistRepository do
 		expect(artists.first.id).to eq ('1')
 		expect(artists.first.name).to eq ('Drake')
 	end
+  
 end
