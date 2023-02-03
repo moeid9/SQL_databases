@@ -14,7 +14,8 @@ TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 -- Replace these statements with your own seed data.
 
 INSERT INTO artists (name, genre) VALUES ('Drake', 'Rap');
-
+INSERT INTO artists (name, genre) VALUES ('BTS', 'Kpop');
 
 INSERT INTO albums (title, release_year, artist_id) VALUES ('Her Loss', '2022', '1');
 INSERT INTO albums (title, release_year, artist_id) VALUES ('Honestly, Never Mind', '2022', '1');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Love Yourself Her', '2019', '2');
